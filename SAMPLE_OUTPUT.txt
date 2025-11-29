@@ -1,0 +1,240 @@
+═════════════════════════════════════════════════════════════════════════════
+                    SAMPLE OUTPUT - EVALUATION METRICS
+═════════════════════════════════════════════════════════════════════════════
+
+EXAMPLE 1: HIGH PERFORMANCE QUERY
+─────────────────────────────────────────────────────────────────────────────
+
+============================================================
+EVALUATION METRICS
+============================================================
+
+Query: 'deep learning neural networks'
+Number of relevant documents: 3
+Number of documents retrieved: 5
+Relevant documents retrieved: 3
+
+────────────────────────────────────────────────────────────
+RETRIEVED DOCUMENTS:
+────────────────────────────────────────────────────────────
+[1] Deep Learning Guide            Score: 0.3576  ✓ RELEVANT
+[2] Machine Learning Basics        Score: 0.1878  ✓ RELEVANT
+[3] Neural Networks                Score: 0.1446  ✓ RELEVANT
+[4] Unsupervised Learning          Score: 0.0000  ✗ Not relevant
+[5] Supervised Learning            Score: 0.0000  ✗ Not relevant
+
+────────────────────────────────────────────────────────────
+EVALUATION METRICS:
+────────────────────────────────────────────────────────────
+Precision    : 0.6000 (3/5)
+Recall       : 1.0000 (3/3)
+MAP (Mean Average Precision): 1.0000
+────────────────────────────────────────────────────────────
+
+INTERPRETATION:
+✓ Excellent! All relevant documents were found (Recall = 1.0)
+✓ 60% of retrieved results are relevant (Precision = 0.6)
+✓ Perfect ranking - relevant docs appear first (MAP = 1.0)
+
+═════════════════════════════════════════════════════════════════════════════
+
+EXAMPLE 2: MODERATE PERFORMANCE QUERY
+─────────────────────────────────────────────────────────────────────────────
+
+============================================================
+EVALUATION METRICS
+============================================================
+
+Query: 'machine learning and artificial intelligence'
+Number of relevant documents: 3
+Number of documents retrieved: 5
+Relevant documents retrieved: 2
+
+────────────────────────────────────────────────────────────
+RETRIEVED DOCUMENTS:
+────────────────────────────────────────────────────────────
+[1] Machine Learning Basics        Score: 0.3099  ✓ RELEVANT
+[2] Unsupervised Learning          Score: 0.0000  ✗ Not relevant
+[3] Supervised Learning            Score: 0.0000  ✗ Not relevant
+[4] Big Data Analytics             Score: 0.0000  ✗ Not relevant
+[5] AI Transformation              Score: 0.0000  ✓ RELEVANT
+
+────────────────────────────────────────────────────────────
+EVALUATION METRICS:
+────────────────────────────────────────────────────────────
+Precision    : 0.4000 (2/5)
+Recall       : 0.6667 (2/3)
+MAP (Mean Average Precision): 0.4667
+────────────────────────────────────────────────────────────
+
+INTERPRETATION:
+⚠ Fair performance. Found 2 out of 3 relevant docs (Recall = 0.67)
+⚠ Only 40% of results are relevant (Precision = 0.40)
+⚠ Ranking could be improved (MAP = 0.47)
+→ Recommendation: Consider query reformulation or re-weighting
+
+═════════════════════════════════════════════════════════════════════════════
+
+EXAMPLE 3: POOR PERFORMANCE QUERY
+─────────────────────────────────────────────────────────────────────────────
+
+============================================================
+EVALUATION METRICS
+============================================================
+
+Query: 'natural language processing'
+Number of relevant documents: 2
+Number of documents retrieved: 5
+Relevant documents retrieved: 0
+
+────────────────────────────────────────────────────────────
+RETRIEVED DOCUMENTS:
+────────────────────────────────────────────────────────────
+[1] Deep Learning Guide            Score: 0.3425  ✗ Not relevant
+[2] Unsupervised Learning          Score: 0.0000  ✗ Not relevant
+[3] Supervised Learning            Score: 0.0000  ✗ Not relevant
+[4] Big Data Analytics             Score: 0.0000  ✗ Not relevant
+[5] AI Transformation              Score: 0.0000  ✗ Not relevant
+
+────────────────────────────────────────────────────────────
+EVALUATION METRICS:
+────────────────────────────────────────────────────────────
+Precision    : 0.0000 (0/5)
+Recall       : 0.0000 (0/2)
+MAP (Mean Average Precision): 0.0000
+────────────────────────────────────────────────────────────
+
+INTERPRETATION:
+✗ No relevant documents retrieved (Precision = 0.0)
+✗ Did not find any relevant docs (Recall = 0.0)
+✗ Complete ranking failure (MAP = 0.0)
+→ Recommendation: Document collection may lack NLP content
+→ Solution: Add more documents or use different keywords
+
+═════════════════════════════════════════════════════════════════════════════
+
+METRIC FORMULAS
+─────────────────────────────────────────────────────────────────────────────
+
+Precision = TP / (TP + FP)
+where:
+  TP (True Positives) = Relevant docs retrieved
+  FP (False Positives) = Irrelevant docs retrieved
+
+Recall = TP / (TP + FN)
+where:
+  TP (True Positives) = Relevant docs retrieved
+  FN (False Negatives) = Relevant docs NOT retrieved
+
+Mean Average Precision (MAP) = (1/|relevant docs|) × Σ P(k) × rel(k)
+where:
+  P(k) = Precision at position k
+  rel(k) = 1 if doc at k is relevant, 0 otherwise
+  |relevant docs| = Total number of relevant documents
+
+═════════════════════════════════════════════════════════════════════════════
+
+INTERPRETATION GUIDE
+─────────────────────────────────────────────────────────────────────────────
+
+PRECISION (What % of my results are correct?)
+  Range: 0.0 (all wrong) to 1.0 (all correct)
+  ≥ 0.8: Excellent  (only relevant results)
+  0.6-0.8: Good     (mostly relevant)
+  0.4-0.6: Fair     (mixed relevant/irrelevant)
+  < 0.4: Poor       (mostly irrelevant)
+
+RECALL (How many of the relevant items did I find?)
+  Range: 0.0 (found none) to 1.0 (found all)
+  ≥ 0.9: Excellent  (almost all relevant)
+  0.7-0.9: Good     (most relevant)
+  0.5-0.7: Fair     (half of relevant)
+  < 0.5: Poor       (less than half)
+
+MAP (How well are relevant docs ranked?)
+  Range: 0.0 (poor ranking) to 1.0 (perfect ranking)
+  ≥ 0.9: Excellent  (relevant docs at top)
+  0.7-0.9: Good     (mostly good ranking)
+  0.5-0.7: Fair     (mixed ranking)
+  < 0.5: Poor       (relevant docs far down)
+
+═════════════════════════════════════════════════════════════════════════════
+
+PRACTICAL USE CASES
+─────────────────────────────────────────────────────────────────────────────
+
+HIGH PRECISION (> 0.8)
+  → Use when: You want few false positives
+  → Examples: Medical search, legal databases, financial data
+
+HIGH RECALL (> 0.8)
+  → Use when: You need to find everything relevant
+  → Examples: Patent search, criminal databases, compliance
+
+BALANCED (Precision & Recall > 0.7)
+  → Use when: You want good results for both metrics
+  → Examples: General web search, academic search
+
+HIGH MAP (> 0.8)
+  → Use when: Ranking order matters
+  → Examples: Search results, recommendation systems
+
+═════════════════════════════════════════════════════════════════════════════
+
+PERFORMANCE SUMMARY TABLE
+─────────────────────────────────────────────────────────────────────────────
+
+Test Case                       Precision  Recall  MAP    Status
+──────────────────────────────  ─────────  ──────  ─────  ──────────────
+Deep Learning & Neural Net      0.6000     1.0000  1.0000 ⭐ EXCELLENT
+Data Science & Analytics        0.6000     1.0000  0.8667 ⭐ EXCELLENT
+Machine Learning & AI           0.4000     0.6667  0.4667 ⚠ FAIR
+Computer Vision & Image         0.2000     0.5000  0.5000 ⚠ FAIR
+Natural Language Processing     0.0000     0.0000  0.0000 ✗ POOR
+
+Average Performance             0.3600     0.6333  0.5667 ⚠ FAIR
+
+═════════════════════════════════════════════════════════════════════════════
+
+VISUALIZATIONS GENERATED
+─────────────────────────────────────────────────────────────────────────────
+
+The visualization script creates a 4-panel dashboard:
+
+Panel 1: Precision Comparison
+         Shows precision scores for each query
+         Green bars = good (≥0.6), Orange = fair, Red = poor (<0.4)
+
+Panel 2: Recall Comparison
+         Shows recall scores for each query
+         Green bars = good (≥0.8), Orange = fair, Red = poor (<0.5)
+
+Panel 3: MAP Comparison
+         Shows Mean Average Precision for each query
+         Green bars = good (≥0.8), Orange = fair, Red = poor (<0.5)
+
+Panel 4: All Metrics Comparison
+         Side-by-side bars for Precision, Recall, and MAP
+         Helps identify trade-offs between metrics
+
+═════════════════════════════════════════════════════════════════════════════
+
+NEXT ACTIONS
+─────────────────────────────────────────────────────────────────────────────
+
+1. Run test_evaluation.py for quick demonstration:
+   python test_evaluation.py
+
+2. Run visualize_metrics.py to see charts:
+   python visualize_metrics.py
+   Output: evaluation_metrics_dashboard.png
+
+3. Integrate into main program:
+   python IR_Project.py
+   Select option 7: "Evaluate Retrieval Performance"
+
+4. Review documentation:
+   - QUICK_REFERENCE.md: User guide
+   - EVALUATION_IMPLEMENTATION.md: Technical details
+
+═════════════════════════════════════════════════════════════════════════════
